@@ -18,5 +18,10 @@
     "CardNumber": 6010000000000000,
     "ExpirationDate": "6/20/2030",
     "NameOfCardholder": "Richard"
+  },
+  {
+    "CardNumber": 0,
+    "CardType": "Invalid",
+    "Error": "InvalidCardNumber"
   }
 ]

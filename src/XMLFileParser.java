@@ -73,7 +73,7 @@ public class XMLFileParser implements FileParser{
                 c = new Card(card_number);
                 output = c.validateCardType();
 
-                if (output.equals("Error")) {
+                if (output.equals("Invalid")) {
                     error_message = "InvalidCardNumber";
                 } else {
                     card_type = output;

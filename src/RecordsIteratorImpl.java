@@ -1,3 +1,5 @@
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -7,8 +9,15 @@ public class RecordsIteratorImpl implements RecordsIterator{
 
     private List<String> csv_records;
     private NodeList xml_records;
+    private JSONArray json_records;
     private int cursor;
     private int max;
+
+    public RecordsIteratorImpl(JSONArray r, int size) {
+        json_records = r;
+        cursor = 0;
+        max = size;
+    }
 
     public RecordsIteratorImpl(List<String> r){
         csv_records = r;
@@ -34,6 +43,7 @@ public class RecordsIteratorImpl implements RecordsIterator{
         return xml_records.item(cursor);
     }
 
+    public JSONObject currentObject(){return (JSONObject) json_records.get(cursor);}
     public boolean isDone(){
          return (max==cursor);
     }

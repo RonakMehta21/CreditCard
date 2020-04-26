@@ -1,5 +1,3 @@
-
-
 public class Card {
 
     private String card_number;

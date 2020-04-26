@@ -81,7 +81,7 @@ public class CsvFileParser implements FileParser{
 
         output = c.validateCardType();
 
-        if(output.equals("Error")){
+        if(output.equals("Invalid")){
             error_message = "InvalidCardNumber";
         } else {
             card_type = output;
