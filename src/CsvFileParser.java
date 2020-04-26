@@ -1,6 +1,4 @@
-import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -72,14 +70,25 @@ public class CsvFileParser implements FileParser{
     public String processEachRecord(String record){
         String output;
         String card_number = "";
-        Card c = null;
         String card_type = "Invalid";
         String error_message = "None";
 
         card_number = record.split(",")[0];
-        c = new Card(card_number);
 
-        output = c.validateCardType();
+        // Implementing Factory Method Pattern to get the Card Factory object
+        CardFactory cardFactory = new CardFactoryImpl();
+
+        // Using the factory object to create the appropriate Object of Subclass of Card
+        Card card = cardFactory.createCard(card_number);
+
+        //Finally validate the card and return the card_type
+        if(card==null){
+            error_message = "InvalidCardNumber";
+            card_type = "Invalid";
+            return (card_number + "," + card_type + "," + error_message);
+        }
+
+        output = card.validateCardType(card_number);
 
         if(output.equals("Invalid")){
             error_message = "InvalidCardNumber";

@@ -14,6 +14,7 @@ public class FileContext {
                 fileParser = new XMLFileParser();
             } else {
                 System.out.print(inputFilename.substring(inputFilename.lastIndexOf(".") + 1).toLowerCase() + " is not a supported file type");
+                System.out.println("Please Enter a Valid file type");
                 return;
             }
 

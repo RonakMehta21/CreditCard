@@ -14,8 +14,9 @@ public class Client {
             String outputFilename = inputObj.nextLine();
 
             //TODO Remove hardcoded file names
-            inputFilename = "/Users/ronakmehta/Desktop/CreditCard/src/Sample.json";
-            outputFilename = "/Users/ronakmehta/Desktop/CreditCard/src/Output.json";
+            //TODO Validate the file names
+            inputFilename = "/Users/ronakmehta/Desktop/CreditCard/src/Sample.xml";
+            outputFilename = "/Users/ronakmehta/Desktop/CreditCard/src/Output.xml";
 
             fc.parse(inputFilename, outputFilename);
         }catch(Exception e){

@@ -63,20 +63,30 @@ public class XMLFileParser implements FileParser{
 
             Element element;
             String card_number = "";
-            Card c = null;
             String output = "";
             String card_type = "Invalid";
             String error_message = "None";
             while (!iterator.isDone()) {
                 element = (Element) iterator.currentNode();
                 card_number = element.getElementsByTagName("CardNumber").item(0).getTextContent();
-                c = new Card(card_number);
-                output = c.validateCardType();
 
-                if (output.equals("Invalid")) {
+                // Implementing Factory Method Pattern to get the Card Factory object
+                CardFactory cardFactory = new CardFactoryImpl();
+
+                // Using the factory object to create the appropriate Object of Subclass of Card
+                Card card = cardFactory.createCard(card_number);
+
+                //Finally validate the card and return the card_type
+                if(card==null){
                     error_message = "InvalidCardNumber";
-                } else {
-                    card_type = output;
+                    card_type = "Invalid";
+                }else{
+                    output = card.validateCardType(card_number);
+                    if (output.equals("Invalid")) {
+                        error_message = "InvalidCardNumber";
+                    } else {
+                        card_type = output;
+                    }
                 }
 
                 Element row = outputDoc.createElement("row");

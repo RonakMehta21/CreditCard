@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
@@ -47,17 +46,32 @@ public class JsonFileParser implements FileParser{
         this.writeFile(outputFilename);
     }
 
-    public JSONObject processEachRecord(JSONObject card){
+    public JSONObject processEachRecord(JSONObject record){
         String output;
-        Card c;
         String card_type = "Invalid";
         String error_message = "None";
-        Object card_number;
+        String card_number;
         JSONObject row = new JSONObject();
 
-        card_number = card.get("CardNumber");
-        c = new Card(card_number.toString());
-        output = c.validateCardType();
+        card_number = record.get("CardNumber").toString();
+
+        // Implementing Factory Method Pattern to get the Card Factory object
+        CardFactory cardFactory = new CardFactoryImpl();
+
+        // Using the factory object to create the appropriate Object of Subclass of Card
+        Card card = cardFactory.createCard(card_number);
+
+        //Finally validate the card and return the card_type
+        if(card==null){
+            error_message = "InvalidCardNumber";
+            card_type = "Invalid";
+            row.put("CardNumber",card_number);
+            row.put("CardType",card_type);
+            row.put("Error",error_message);
+            return row;
+        }
+
+        output = card.validateCardType(card_number);
 
         if(output.equals("Invalid")){
             error_message = "InvalidCardNumber";
