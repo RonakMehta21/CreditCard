@@ -3,7 +3,6 @@ package com;
 public class CardFactoryImpl implements CardFactory {
     public Card createCard(String card_number){
 
-        //TODO Validate for Invalide card_number
         if (card_number.equals("")){
             return null;
         }

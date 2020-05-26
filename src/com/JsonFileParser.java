@@ -1,6 +1,8 @@
 package com;
 
 import java.io.*;
+import java.util.Date;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
@@ -54,6 +56,7 @@ public class JsonFileParser implements FileParser {
         String card_type = "Invalid";
         String error_message = "None";
         String card_number;
+        Date expiry_date;
         JSONObject row = new JSONObject();
 
         try {
@@ -61,7 +64,7 @@ public class JsonFileParser implements FileParser {
         }catch(Exception e){
             error_message = "InvalidCardNumber";
             card_type = "Invalid";
-            row.put("CardNumber",null);
+            row.put("CardNumber",0);
             row.put("CardType",card_type);
             row.put("Error",error_message);
             return row;
@@ -76,7 +79,7 @@ public class JsonFileParser implements FileParser {
         if(card==null){
             error_message = "InvalidCardNumber";
             card_type = "Invalid";
-            row.put("CardNumber",card_number);
+            row.put("CardNumber",Long.parseLong(card_number));
             row.put("CardType",card_type);
             row.put("Error",error_message);
             return row;
@@ -88,7 +91,7 @@ public class JsonFileParser implements FileParser {
             error_message = "InvalidCardNumber";
         }
         card_type = output;
-        row.put("CardNumber",card_number);
+        row.put("CardNumber",Long.parseLong(card_number));
         row.put("CardType",card_type);
         row.put("Error",error_message);
         return row;

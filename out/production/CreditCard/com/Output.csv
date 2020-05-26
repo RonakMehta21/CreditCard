@@ -2,5 +2,5 @@ CardNumber,CardType,Error
 5.41E+15,MasterCard,None
 4.12E+12,Visa,None
 3.41E+14,AmericanExpress,None
-,Invalid,InvalidCardNumber
+6.011E+15,Discover,None
 0E+00,Invalid,InvalidCardNumber

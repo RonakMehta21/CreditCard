@@ -20,7 +20,7 @@ public class CsvFileParser implements FileParser {
             if(records.get(0).toLowerCase().startsWith("card")){
                 records.remove(0);
             }
-        } catch (Exception e) {
+        } catch (Exception e){
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
@@ -80,6 +80,7 @@ public class CsvFileParser implements FileParser {
         String card_number = "";
         String card_type = "Invalid";
         String error_message = "None";
+        Date expiry_date;
 
         card_number = record.split(",")[0];
 
